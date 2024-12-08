@@ -7,7 +7,10 @@
 ## Overview
 This project is my capstone initiative, completed in collaboration with GUVI and CHUBB. It showcases a comprehensive solution integrating full-stack development, frontend-backend coordination, and real-world problem-solving to deliver a dynamic online learning platform.
 
+![image](https://github.com/user-attachments/assets/a435950c-8b6c-428f-b6f6-879e5a231ef3)
+
 ![image](https://github.com/user-attachments/assets/87856cc5-cbea-41c9-8a30-c1cb931d1680)
+
 ![GUVI_CHUBB_Project_Flowchart](https://github.com/user-attachments/assets/f4839a9b-2a76-4a2c-8ba5-ce97039b97ec)
 
 
