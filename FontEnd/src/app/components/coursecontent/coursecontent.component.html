@@ -1,0 +1,144 @@
+<div class="dashboard-content container mx-auto p-6 bg-gray-50 rounded-lg shadow-md">
+  <!-- Title Section -->
+  <div *ngIf="role == 'Admin' || role == 'Instructor'">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl font-semibold text-gray-800 mb-4">Add Course Content</h2>
+      <p class="text-gray-600">
+          Upload any type of file or add YouTube links to enhance your course material.
+      </p>
+    </div>
+
+    <!-- Upload Content Section -->
+    <div class="flex flex-wrap gap-6 mb-8">
+      <!-- File Upload Section -->
+      <div class="w-full">
+        <label class="block text-gray-700 mb-2">Upload File</label>
+        <input
+          type="file"
+          (change)="onFileSelect($event)"
+          class="w-full p-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 transition"
+        />
+        <p class="mt-2 text-gray-500 text-sm">
+          Supports all file types: Videos, Images, Audio, Documents, PDFs, Spreadsheets,
+          Presentations, and more
+        </p>
+      </div>
+    </div>
+
+    <!-- YouTube Link Section -->
+    <div class="w-full">
+      <label class="block text-gray-700 mb-2">YouTube Link</label>
+      <input
+        type="text"
+        [(ngModel)]="youtubeLink"
+        placeholder="Enter YouTube URL"
+        class="w-full p-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 transition"
+      />
+    </div>
+
+    <!-- Add Content Button -->
+    <div class="text-center mb-8">
+      <button
+        (click)="addContent()"
+        class="bg-blue-600 text-white text-lg px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300"
+      >
+        Add Content
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Stored Content Display -->
+  <div>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Stored Content</h3>
+    <div *ngIf="storedContent.length === 0" class="text-gray-500 text-center">
+      No content added yet.
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let content of storedContent; let i = index"
+        class="relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
+      >
+        <!-- Content Container -->
+        <div class="p-4">
+          <!-- YouTube Content -->
+          <div *ngIf="content.type === 'youtube'" class="mb-4">
+            <img
+              [src]="content.thumbnail"
+              alt="YouTube Thumbnail"
+              class="w-full h-48 object-cover rounded-lg mb-3"
+            />
+            <button
+              (click)="playYouTube(content.url)"
+              class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition duration-300"
+            >
+              Play Video
+            </button>
+          </div>
+
+          <!-- Image Content -->
+          <div *ngIf="content.type === 'image'" class="mb-4">
+            <img
+              [src]="content.url"
+              [alt]="content.name"
+              class="w-full h-48 object-cover rounded-lg cursor-pointer"
+              (click)="openImageModal(content.url)"
+            />
+          </div>
+
+          <!-- Video Content -->
+          <div *ngIf="content.type === 'video'" class="mb-4">
+            <video [src]="content.url" controls class="w-full rounded-lg"></video>
+          </div>
+
+          <!-- Other File Types -->
+          <div
+            *ngIf="['document', 'pdf', 'spreadsheet', 'presentation', 'compressed', 'unknown'].includes(content.type)"
+            class="mb-4"
+          >
+            <div class="flex items-center">
+              <img
+                src="https://www.oreilly.com/api/v2/epubs/9780134077642/files/graphics/common15.jpg"
+                alt="File Icon"
+                class="w-12 h-12 mr-4"
+              />
+              <p class="font-semibold text-gray-800">{{ content.name }}</p>
+            </div>
+            <a
+              [href]="content.url"
+              download
+              class="bg-green-600 text-white px-4 py-2 rounded-full mt-3 inline-block hover:bg-green-700 transition duration-300"
+            >
+              Download File
+            </a>
+          </div>
+        </div>
+
+        <!-- Delete Button -->
+        <button *ngIf="role == 'Admin' || role=='Instructor'"
+          (click)="deleteContent(i)"
+          class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition duration-300"
+        >
+          ✖
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Image Modal -->
+  <div *ngIf="isImageModalOpen" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+  <div class="relative max-w-4xl max-h-full">
+    <img [src]="selectedImage" alt="Selected Image" class="max-w-full max-h-96 object-contain mx-auto" />
+    <button
+      (click)="closeImageModal()"
+      class="absolute top-4 right-4 text-white text-3xl font-bold bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75"
+    >
+      ✖
+    </button>
+  </div>
+</div>
+
+</div>

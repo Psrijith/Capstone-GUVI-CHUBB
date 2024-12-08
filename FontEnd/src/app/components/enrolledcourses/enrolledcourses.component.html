@@ -1,0 +1,187 @@
+<div class="dashboard-content main-content bg-teal-100 px-8 py-6">
+  <!-- Page Title -->
+  <h1
+    class="text-4xl font-bold text-center mb-6 text-teal-700"
+    *ngIf="currentComponent !== 'CourseContent'"
+  >
+    My Enrolled Courses
+  </h1>
+
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="flex justify-center items-center space-x-2">
+    <span class="text-xl font-semibold">Loading enrolled courses...</span>
+    <div
+      class="w-6 h-6 border-4 border-t-4 border-teal-500 rounded-full animate-spin"
+    ></div>
+  </div>
+
+  <!-- Enrolled Courses Grid -->
+  <div
+    *ngIf="
+      !isLoading &&
+      enrolledCourses.length > 0 &&
+      currentComponent !== 'CourseContent'
+    "
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+  >
+    <div
+      *ngFor="let course of enrolledCourses"
+      class="bg-white shadow-xl rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col"
+    >
+      <!-- Course Image -->
+      <div class="h-48 bg-gray-200 flex items-center justify-center relative">
+        <img
+          [src]="getCategoryImage(course.category)"
+          alt="Course Image"
+          class="object-cover w-full h-full"
+        />
+        <!-- Category Badge -->
+        <div
+          class="absolute top-2 left-2 bg-teal-500 text-white text-xs px-3 py-1 rounded-full"
+        >
+          {{ course.category }}
+        </div>
+      </div>
+
+      <!-- Course Content -->
+      <div class="p-4 flex-1">
+        <h2 class="text-xl font-semibold text-teal-700 mb-2">
+          {{ course.title }}
+        </h2>
+        <p class="text-gray-600 mb-2">
+          {{ course.description | slice : 0 : 130 }}...
+        </p>
+        <div class="text-sm text-gray-500 mb-2">
+          <strong>Instructor:</strong>
+          {{ course.instructor?.name || "Unknown" }}
+        </div>
+        <div class="text-sm text-gray-500 mb-2">
+          <strong>Difficulty:</strong> {{ course.difficultyLevel }}
+        </div>
+        <div class="text-sm text-gray-500 mb-2">
+          <strong>Duration:</strong> {{ course.duration | slice : 0 : 8 }}
+        </div>
+      </div>
+
+      <!-- Buttons for Unenroll, Open/Start, and Give Feedback -->
+      <div class="p-4 border-t flex justify-between gap-4">
+        <!-- Unenroll Button -->
+        <button
+          *ngIf="!isLoading"
+          class="w-5/12 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+          (click)="unenrollCourse(course.courseId)"
+        >
+          Unenroll
+        </button>
+
+        <!-- Open/Start Button -->
+        <button
+          *ngIf="!isLoading"
+          class="w-5/12 bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors"
+          (click)="loadComponent('CourseContent')"
+        >
+          Open Course
+        </button>
+
+        <!-- Give Feedback Button -->
+        <button
+          *ngIf="!isLoading"
+          class="w-5/12 bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors"
+          (click)="openFeedbackModal(course.courseId)"
+        >
+          Give Feedback
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Enrolled Courses Message -->
+  <div
+    *ngIf="
+      !isLoading &&
+      enrolledCourses.length === 0 &&
+      currentComponent !== 'CourseContent'
+    "
+    class="text-center mt-12"
+  >
+    <p class="text-xl font-semibold text-gray-500">
+      You are not enrolled in any courses yet.
+    </p>
+  </div>
+
+  <!-- Course Content Section -->
+  <div *ngIf="currentComponent === 'CourseContent'">
+    <ng-container *ngIf="currentComponent === 'CourseContent'">
+      <!-- Back Button -->
+      <button
+        class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition-colors mb-6"
+        (click)="goBackToCourses()"
+      >
+        Back to Enrolled Courses
+      </button>
+
+      <h2 class="text-2xl font-bold text-teal-700 mb-6">Course Content</h2>
+      <app-coursecontent></app-coursecontent>
+    </ng-container>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div
+    *ngIf="isFeedbackModalOpen"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-xl w-96">
+      <h3 class="text-xl font-semibold text-teal-700 mb-4">Provide Feedback</h3>
+      <form (ngSubmit)="submitFeedback(selectedCourseId!)">
+        <!-- Rating Selection -->
+        <div class="mb-4">
+          <label class="block text-sm font-semibold mb-2" for="rating"
+            >Rating</label
+          >
+          <select
+            id="rating"
+            [(ngModel)]="ratingValue"
+            name="rating"
+            class="w-full px-4 py-2 border rounded-lg"
+          >
+            <option *ngFor="let rating of [1, 2, 3, 4, 5]" [value]="rating">
+              {{ rating }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Comment Input -->
+        <div class="mb-4">
+          <label class="block text-sm font-semibold mb-2" for="comments"
+            >Comments</label
+          >
+          <textarea
+            id="comments"
+            [(ngModel)]="reviewComments"
+            name="comments"
+            rows="4"
+            class="w-full px-4 py-2 border rounded-lg"
+            placeholder="Write your feedback..."
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-between">
+          <button
+            type="button"
+            class="bg-gray-300 text-black py-2 px-4 rounded-lg hover:bg-gray-400"
+            (click)="closeFeedbackModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

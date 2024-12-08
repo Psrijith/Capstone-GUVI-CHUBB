@@ -1,0 +1,328 @@
+  <app-navbar></app-navbar>
+  <div class="dashboard-container">
+    <!-- Side Panel -->
+    <div class="side-panel bg-teal-500 text-white" [class.collapsed]="isPanelCollapsed">
+      <button class="toggle-button text-white hover:bg-teal-600" (click)="togglePanel()">
+        {{ isPanelCollapsed ? '☰' : '✖' }}
+      </button>
+
+      <!-- Menu Items -->
+      <ul>
+        <li *ngIf="userRole === 'Admin' || userRole === 'Instructor'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'dashboard'" 
+          (click)="loadComponent('dashboard')">
+          <i class="fas fa-tachometer-alt icon"></i>
+          <span>Dashboard</span>
+        </li>
+
+        <li *ngIf="userRole == 'Admin'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'manageInstructors'" 
+          (click)="loadComponent('manageInstructors')">
+          <i class="fas fa-chalkboard-teacher icon"></i>
+          <span>Manage Instructors</span>
+        </li>
+
+        <li *ngIf="userRole == 'Admin'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'manageStudents'" 
+          (click)="loadComponent('manageStudents')">
+          <i class="fas fa-user-graduate icon"></i>
+          <span>Manage Students</span>
+        </li>
+
+        <li *ngIf="userRole == 'Instructor' || userRole == 'Admin'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'createCourse'" 
+          (click)="loadComponent('createCourse')">
+          <i class="fas fa-book-open icon"></i>
+          <span>Create Course</span>
+        </li>
+
+         <li *ngIf="userRole == 'Admin' || userRole == 'Instructor'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'CourseContent'" 
+          (click)="loadComponent('CourseContent')">
+          <i class="fas fa-solid fa-book icon"></i>
+          <span>Course Content</span>
+        </li>
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'viewCourses'" 
+          (click)="loadComponent('viewCourses')">
+          <i class="fas fa-book-reader icon"></i>
+          <span>View Courses</span>
+        </li>
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'exploreCourses'" 
+          (click)="loadComponent('exploreCourses')">
+          <i class="fas fa-search icon"></i>
+          <span>Explore Courses</span>
+        </li>
+
+        <li *ngIf="userRole == 'Learner'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'viewEnrolledCourses'" 
+          (click)="loadComponent('viewEnrolledCourses')">
+          <i class="fas fa-folder-open icon"></i>
+          <span>View Enrolled Courses</span>
+        </li>
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'viewReviews'" 
+          (click)="loadComponent('viewReviews')">
+          <i class="fas fa-star icon"></i> <!-- Updated icon -->
+          <span>Course Reviews</span>
+        </li>
+
+        <li *ngIf="userRole != null && userRole != 'Admin'" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'assignment'" 
+          (click)="loadComponent('assignment')">
+          <i class="fas fa-pen icon"></i> <!-- Updated icon -->
+          <span>Assignments & Announcements </span>
+        </li>
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'discussion'" 
+          (click)="loadComponent('discussion')">
+          <i class="fas fa-comments icon"></i> <!-- Updated icon -->
+          <span>Discussion</span>
+        </li>
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'LearningPaths'" 
+          (click)="loadComponent('LearningPaths')">
+          <i class="fas fa-sitemap icon"></i>
+          <span>Learning Paths</span>
+        </li>
+
+
+        <li *ngIf="userRole != null" 
+          class="menu-item hover:bg-teal-600 px-4 py-2 rounded-md cursor-pointer"
+          [class.bg-teal-600]="currentComponent === 'SmartQuiz'" 
+          (click)="loadComponent('SmartQuiz')">
+          <i class="fas fa-brain icon"></i>
+          <span>Smart Quiz</span>
+        </li>
+
+
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content bg-teal-100 min-h-screen px-6 py-4">
+
+      <ng-container *ngIf="currentComponent === 'dashboard'">
+        <h1 *ngIf="userRole=='Admin' || userRole== 'Instructor'" class="text-3xl font-bold text-teal-700">
+          <app-admin-dashboard></app-admin-dashboard>
+        </h1>
+      </ng-container>
+      
+      
+      <ng-container *ngIf="currentComponent === 'dashboard'">
+        <h1 *ngIf="userRole!='Admin' && userRole != 'Instructor'" class="text-3xl font-bold text-teal-700">
+    <div class="dashboard-content admin-dashboard-container flex flex-col h-screen">
+    <!-- Main Content (Scrollable) -->
+    <div class="flex-1 bg-gray-50 overflow-y-auto">
+      <!-- Hero Section -->
+      <section class="relative bg-teal-100 text-teal-900 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+          <img
+            src="https://i.pinimg.com/originals/f4/6c/4f/f46c4f0c2842ed57ac3670e35faaa411.gif"
+            alt="Hero Image"
+            class="mx-auto mb-6 rounded-lg shadow-lg"
+          />
+          <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+            Welcome to LearnHub
+          </h1>
+          <p class="text-lg sm:text-xl mb-8">
+            Explore a wide range of online courses that help you grow, learn,
+            and achieve your goals.
+          </p>
+          <a
+            href="dashboard"
+            class="bg-teal-500 text-white py-2 px-6 rounded-lg text-xl hover:bg-teal-600 transition duration-300"
+            >Get Started</a
+          >
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-3xl font-semibold text-teal-700 mb-12 text-center">
+            Discover Our Categories
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-100 p-6 rounded-lg text-center shadow-md">
+              <img
+                src="https://i.pinimg.com/originals/02/74/20/0274207612d515f49012c87803a9e631.gif"
+                alt="Category Image"
+                class="mx-auto mb-4 w-32 h-32 rounded-lg"
+              />
+              <h3 class="text-xl font-semibold text-teal-700">Web Development</h3>
+              <p class="text-gray-600">
+                Learn the latest trends in web design and development.
+              </p>
+            </div>
+            <div class="bg-gray-100 p-6 rounded-lg text-center shadow-md">
+              <img
+                src="https://evyom.com/wp-content/uploads/2020/05/analytics-app.gif"
+                alt="Category Image"
+                class="mx-auto mb-4 w-32 h-32 rounded-lg"
+              />
+              <h3 class="text-xl font-semibold text-teal-700">Data Science</h3>
+              <p class="text-gray-600">
+                Master data analysis and machine learning techniques.
+              </p>
+            </div>
+            <div class="bg-gray-100 p-6 rounded-lg text-center shadow-md">
+              <img
+                src="https://i.pinimg.com/originals/78/58/ba/7858ba97ff1aa06173f0517aeb002b01.gif"
+                alt="Category Image"
+                class="mx-auto mb-4 w-32 h-32 rounded-lg"
+              />
+              <h3 class="text-xl font-semibold text-teal-700">
+                Creative Design
+              </h3>
+              <p class="text-gray-600">
+                Build skills in graphic design and visual communication.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="py-16 px-4 sm:px-6 lg:px-8 bg-teal-50">
+        <div class="max-w-7xl mx-auto text-center">
+          <h2 class="text-3xl font-semibold text-teal-700 mb-12">
+            What Our Students Say
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/024/830/931/original/3d-cute-smiling-university-or-college-student-studying-with-laptop-on-his-lap-transparent-student-3d-render-3d-student-character-isolated-on-transparent-background-student-studying-generative-ai-png.png"
+                  alt="Student"
+                  class="rounded-full w-16 h-16 mr-4"
+                />
+                <div class="text-left">
+                  <p class="text-lg font-semibold text-teal-700">Srijith</p>
+                  <p class="text-gray-600 text-sm">
+                    "LearnHub helped me transition into a new career in web
+                    development. The courses are so easy to follow!"
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://img.freepik.com/premium-psd/3d-cute-smiling-university-college-student-studying-with-laptop-his-lap-3d-student-render_753500-437.jpg"
+                  alt="Student"
+                  class="rounded-full w-16 h-16 mr-4"
+                />
+                <div class="text-left">
+                  <p class="text-lg font-semibold text-teal-700">Peddireddy</p>
+                  <p class="text-gray-600 text-sm">
+                    "I love how interactive and engaging the courses are. I
+                    feel supported every step of the way."
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <img
+                  src="https://img.freepik.com/free-photo/3d-cartoon-style-character_23-2151034097.jpg"
+                  alt="Student"
+                  class="rounded-full w-16 h-16 mr-4"
+                />
+                <div class="text-left">
+                  <p class="text-lg font-semibold text-teal-700">Siri</p>
+                  <p class="text-gray-600 text-sm">
+                    "The community and support are amazing. I gained so much
+                    knowledge and confidence!"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</h1>
+</ng-container>
+
+
+      
+      <ng-container *ngIf="currentComponent === 'manageInstructors'">
+        <h2 class="text-2xl font-bold text-teal-700">Manage Instructors
+          <app-mginstructor></app-mginstructor>
+        </h2> 
+      </ng-container>
+      <ng-container *ngIf="currentComponent === 'manageStudents'">
+        <h2 class="text-2xl font-bold text-teal-700">Manage Students
+          <app-mglearner></app-mglearner>
+        </h2> 
+      </ng-container>
+      <ng-container *ngIf="currentComponent === 'createCourse'"> 
+        <app-createcourse></app-createcourse>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'viewCourses'">
+        <h2 class="text-2xl font-bold text-teal-700">View Courses</h2>
+        <app-allcourses [hideSearchAndSort]="true"></app-allcourses>
+      </ng-container>
+      
+      <ng-container *ngIf="currentComponent === 'exploreCourses'">
+        <h2 class="text-2xl font-bold text-teal-700">
+          <app-allcourses></app-allcourses>
+        </h2> 
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'viewEnrolledCourses'">
+        <app-enrolledcourses></app-enrolledcourses>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'viewReviews'">
+        <app-viewreviews></app-viewreviews>>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'assignment'">
+        <app-assignment></app-assignment>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'discussion'">
+        <app-discussion></app-discussion>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'CourseContent'">
+        <h2 class="text-2xl font-bold text-teal-700">Course content</h2>
+        <app-coursecontent></app-coursecontent>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'LearningPaths'">
+        <h2 class="text-2xl font-bold text-teal-700">Learning Paths</h2>
+        <app-learningpaths></app-learningpaths>
+      </ng-container>
+
+      <ng-container *ngIf="currentComponent === 'SmartQuiz'">
+        <h2 class="text-2xl font-bold text-teal-700">realtime Instant Smart Quiz</h2> 
+        <app-quiz></app-quiz>
+      </ng-container>
+      
+    </div>
+  </div>
+
+  <app-footer></app-footer>

@@ -1,0 +1,41 @@
+<div class="dashboard-content">
+  <!-- Discussion Form -->
+  <div class="mb-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Start a New Discussion</h2>
+    <form [formGroup]="newDiscussionForm" (ngSubmit)="postDiscussion()">
+      <div class="mb-4">
+        <label for="postContent" class="block text-sm font-medium text-gray-600">Discussion Content</label>
+        <textarea id="postContent" formControlName="postContent" rows="4" class="w-full p-2 border rounded-md" placeholder="Enter your discussion content..."></textarea>
+      </div>
+      <button type="submit" class="py-2 px-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">Post Discussion</button>
+    </form>
+  </div>
+
+  <!-- Discussion List -->
+  <div *ngIf="discussions.length > 0" class="space-y-6">
+    <div *ngFor="let discussion of discussions" class="bg-white p-6 rounded-lg shadow-lg">
+      <h3 class="text-lg font-semibold text-gray-800">{{ discussion.postContent }}</h3>
+      <p class="text-gray-500 text-sm">Posted on: {{ discussion.postDate | date: 'MMM d, yyyy h:mm a' }}</p>
+      <p class="text-sm font-medium text-gray-600"><strong>Status:</strong> {{ discussion.status }}</p>
+      
+      <!-- Mark as Open button -->
+      <div *ngIf="discussion.status === 'Closed'">
+        <button (click)="markDiscussionAsOpen(discussion.discussionId)" class="mt-4 py-2 px-4 bg-green-600 text-white rounded-full hover:bg-green-700 transition">
+          Mark as Open (Reply/Clarified)
+        </button>
+      </div>
+      
+      <!-- Mark as Closed button -->
+      <div *ngIf="discussion.status === 'Open'">
+        <button (click)="markDiscussionAsClosed(discussion.discussionId)" class="mt-4 py-2 px-4 bg-red-600 text-white rounded-full hover:bg-red-700 transition">
+          Mark as Closed
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Discussions Available -->
+  <div *ngIf="discussions.length === 0" class="text-gray-500">
+    No discussions available. Be the first to post a discussion!
+  </div>
+</div>

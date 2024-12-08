@@ -1,0 +1,114 @@
+<head>
+  <link rel="stylesheet" href="./createcourse.component.css">
+</head>
+
+<div class="dashboard-content max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+  <h2 class="text-4xl font-extrabold text-teal-700 mb-8 text-center border-b pb-4">Create a New Course</h2>
+
+  <form [formGroup]="createCourseForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="mb-6">
+      <label for="title" class="block text-lg font-medium text-gray-700 mb-2">Course Title</label>
+      <input 
+        type="text" 
+        id="title" 
+        formControlName="title" 
+        placeholder="Enter the course title" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      />
+      <div *ngIf="formControls['title'].touched && formControls['title'].invalid" class="text-red-500 text-sm mt-1">
+        <div *ngIf="formControls['title'].errors?.['required']">Title is required.</div>
+        <div *ngIf="formControls['title'].errors?.['maxlength']">Title cannot exceed 100 characters.</div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-6">
+      <label for="description" class="block text-lg font-medium text-gray-700 mb-2">Description</label>
+      <textarea 
+        id="description" 
+        formControlName="description" 
+        placeholder="Provide a brief description of the course" 
+        rows="4" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      ></textarea>
+      <div *ngIf="formControls['description'].touched && formControls['description'].invalid" class="text-red-500 text-sm mt-1">
+        <div *ngIf="formControls['description'].errors?.['required']">Description is required.</div>
+        <div *ngIf="formControls['description'].errors?.['maxlength']">Description cannot exceed 500 characters.</div>
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-6">
+      <label for="category" class="block text-lg font-medium text-gray-700 mb-2">Category</label>
+      <input 
+        type="text" 
+        id="category" 
+        formControlName="category" 
+        placeholder="E.g., Web Development, Cybersecurity" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      />
+      <div *ngIf="formControls['category'].touched && formControls['category'].invalid" class="text-red-500 text-sm mt-1">
+        <div *ngIf="formControls['category'].errors?.['required']">Category is required.</div>
+      </div>
+    </div>
+
+    <!-- Difficulty Level -->
+    <div class="mb-6">
+      <label for="difficultyLevel" class="block text-lg font-medium text-gray-700 mb-2">Difficulty Level</label>
+      <select 
+        id="difficultyLevel" 
+        formControlName="difficultyLevel" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      >
+        <option value="" disabled>Select difficulty</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+      <div *ngIf="formControls['difficultyLevel'].touched && formControls['difficultyLevel'].invalid" class="text-red-500 text-sm mt-1">
+        <div *ngIf="formControls['difficultyLevel'].errors?.['required']">Difficulty level is required.</div>
+      </div>
+    </div>
+
+    <!-- Duration -->
+    <div class="mb-6">
+      <label for="duration" class="block text-lg font-medium text-gray-700 mb-2">Duration (HH:mm:ss)</label>
+      <input 
+        type="text" 
+        id="duration" 
+        formControlName="duration" 
+        placeholder="E.g., 06:00:00" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      />
+      <div *ngIf="formControls['duration'].touched && formControls['duration'].invalid" class="text-red-500 text-sm mt-1">
+        <div *ngIf="formControls['duration'].errors?.['required']">Duration is required.</div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="mb-6">
+      <label for="status" class="block text-lg font-medium text-gray-700 mb-2">Status</label>
+      <select 
+        id="status" 
+        formControlName="status" 
+        class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+      >
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="text-red-500 text-center mb-6">{{ errorMessage }}</div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      [disabled]="loading" 
+      class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg shadow-lg text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
+    >
+      {{ loading ? 'Creating...' : 'Create Course' }}
+    </button>
+  </form>
+</div>

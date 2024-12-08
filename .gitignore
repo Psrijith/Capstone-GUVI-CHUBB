@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/demobkend/appsettings.json
+/demobkend/bin/Debug/net8.0/appsettings.json
+demobkend/bin/Debug/net8.0/appsettings.json
+
+\demobkend\bin\Debug\net8.0\appsettings.json
+
+# Visual Studio files
+/demobkend/.vs/
+/demobkend/.bin/
+*.vspscc
+*.vssscc

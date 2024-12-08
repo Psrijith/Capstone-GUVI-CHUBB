@@ -1,0 +1,6 @@
+@demobkend_HostAddress = http://localhost:5204
+
+GET {{demobkend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

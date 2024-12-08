@@ -1,0 +1,6 @@
+ .dashboard-content {
+  overflow-y: auto;
+  padding: 20px;
+  max-height: 80vh;
+  background-color: #f4f4f4;
+}

@@ -1,0 +1,44 @@
+<div class="manage-instructors p-6 bg-gray-50">
+  <h2 class="text-2xl font-bold text-center mb-6">Manage Instructors</h2>
+
+  <div *ngIf="isLoading" class="loading text-center text-lg font-medium text-gray-500">
+    Loading...
+  </div>
+
+  <div class="overflow-x-auto"> <!-- Make the table scrollable on small screens -->
+    <table *ngIf="!isLoading" class="user-table min-w-full bg-white border-collapse border border-gray-200 rounded-lg shadow-md">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">User ID</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">Username</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">Email</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">Role</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">Active</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 sm:text-base">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" [ngClass]="{'bg-green-100': user.isActive, 'bg-red-100': !user.isActive}">
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">{{ user.userId }}</td>
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">{{ user.username }}</td>
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">{{ user.email }}</td>
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">{{ user.role }}</td>
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">
+            <span [class.text-green-500]="user.isActive" [class.text-red-500]="!user.isActive">
+              {{ user.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td class="px-4 py-2 text-sm text-gray-700 sm:text-base">
+            <button 
+              (click)="toggleActive(user)" 
+              [disabled]="user.role === 'Admin'"
+              class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+            >
+              {{ user.isActive ? 'Deactivate' : 'Activate' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

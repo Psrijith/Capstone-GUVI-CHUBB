@@ -1,0 +1,134 @@
+/* Admin Dashboard Wrapper */
+.admin-dashboard-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scrollable Content for Admin Dashboard */
+.admin-dashboard-content {
+  overflow-y: auto;
+  padding: 20px;
+  max-height: 80vh;
+  background-color: #f4f4f4;
+}
+
+/* KPI Container */
+.kpi-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+/* KPI Boxes */
+.kpi {
+  flex: 1 1 200px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kpi h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.kpi p {
+  font-size: 24px;
+  color: #007bff;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+/* Set Size for Pie Charts (Perfect Circles) */
+canvas {
+  width: 100% !important; /* Make the chart responsive */
+  max-width: 500px; /* Max width to keep the charts smaller */
+  height: 500px !important; /* Height for pie charts to maintain circular aspect */ 
+}
+
+/* Set Size for Line Chart */
+canvas.line-chart {
+  width: 100% !important;
+  max-width: 800px; /* Max width for line chart */
+  height: 400px !important; /* Fixed height for the line chart */
+}
+ 
+
+/* Chart Container */
+.charts-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Enable Flexbox for side-by-side layout */
+  flex-wrap: wrap; /* Allow wrapping of items if needed */
+  gap: 20px; /* Space between the chart items */
+}
+
+/* Chart Items */
+.chart-item {
+  flex: 1 1 48%; /* Allow the chart items to be flexible but ensure each takes 48% of the container width */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the charts retain their size and do not stretch */
+canvas {
+  width: 100% !important;
+  max-width: 500px; /* Keep the maximum width to maintain smaller size */
+  height: 500px !important; /* Ensure the height stays the same */
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    flex-direction: column; /* Stack charts vertically on smaller screens */
+  }
+
+  .chart-item {
+    flex: 1 1 100%; /* Full width for each chart when on small screens */
+  }
+}
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .kpi-container {
+    display: block;
+  }
+
+  .kpi {
+    margin-bottom: 20px;
+    flex: 1 1 100%;
+  }
+
+  .admin-dashboard-content {
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard-content {
+    max-height: 60vh;
+  }
+}

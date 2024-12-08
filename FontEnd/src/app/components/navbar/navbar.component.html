@@ -1,0 +1,152 @@
+<!-- Navbar -->
+<nav class="bg-teal-500 text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between py-4" style="height: 80px;">  <!-- Fixed height for the navbar -->
+      <!-- Logo or Brand Name -->
+      <div class="flex items-center space-x-2">
+        <a href="dashboard" class="flex items-center">
+          <img
+            src="https://media.licdn.com/dms/image/D4D12AQE4REp8Ze0uGw/article-cover_image-shrink_600_2000/0/1697448557618?e=2147483647&v=beta&t=LUr2xPd30ASZCJOJFviqanl_0ZsAhrSmKLbLSt74gxE"
+            alt="Logo"
+            class="mr-5 transform scale-125"  
+            style="width: auto; height: 100px;"  
+          />
+          <span class="text-2xl font-bold">Online Learning Platform</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="md:hidden">
+        <button
+          class="text-white hover:bg-teal-600 p-2 rounded-md focus:outline-none"
+          (click)="toggleMobileMenu()"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Nav Links (Desktop) -->
+      <div class="hidden md:flex space-x-6">
+        <a
+          *ngIf="userRole === 'Admin' || userRole === 'Instructor'"
+          href="dashboard"
+          class="text-white hover:bg-teal-600 px-3 py-2 rounded-md text-sm font-medium"
+          >Dashboard</a
+        >
+        <a
+          href="allcourses"
+          class="text-white hover:bg-teal-600 px-3 py-2 rounded-md text-sm font-medium"
+          >Courses</a
+        >
+        <div class="relative group">
+          <button
+            class="text-white hover:bg-teal-600 px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Resources <i class="fas fa-chevron-down ml-1"></i>
+          </button>
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-white text-teal-700 rounded-lg shadow-md py-2 mt-1 min-w-[150px] z-10"
+          >
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-teal-100 text-sm"
+              >Instructors</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-teal-100 text-sm"
+              >Students</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-teal-100 text-sm"
+              >Tutorials</a
+            >
+          </div>
+        </div>
+        <a
+          href="#contact"
+          class="text-white hover:bg-teal-600 px-3 py-2 rounded-md text-sm font-medium"
+          >Contact Us</a
+        >
+      </div>
+
+      <!-- Profile and Logout (Desktop) -->
+      <div class="hidden md:flex items-center space-x-4">
+        <!-- Profile Button with Icon -->
+        <button
+          [routerLink]="['/profile']"
+          class="flex items-center text-white hover:bg-teal-600 px-3 py-2 rounded-md text-sm font-medium"
+        >
+          <i class="fas fa-user-circle text-xl mr-2"></i> Profile
+        </button>
+
+        <!-- Logout Button -->
+        <button
+          (click)="logout()"
+          class="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium"
+        >
+          Logout
+        </button>
+
+        <div class="flex items-center space-x-2">
+        <a href="dashboard" class="flex items-center">
+          <img
+            src="https://globaleducation.s3.ap-south-1.amazonaws.com/globaledu/gif/student-training.gif"
+            alt="just for fun"
+            class="ml-5" 
+            style="width: auto; height: 100px; border-radius: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"   
+          />
+        </a>
+      </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by Default) -->
+    <div
+      class="md:hidden flex flex-col space-y-2 pt-4"
+      *ngIf="mobileMenuOpen"
+    >
+      <a
+        *ngIf="userRole === 'Admin' || userRole === 'Instructor'"
+        href="dashboard"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+        >Dashboard</a
+      >
+      <a
+        href="allcourses"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+        >Courses</a
+      >
+      <a
+        href="#"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+        >Instructors</a
+      >
+      <a
+        href="#"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+        >Students</a
+      >
+      <a
+        href="#contact"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+        >Contact Us</a
+      >
+      <!-- Profile and Logout -->
+      <button
+        [routerLink]="['/profile']"
+        class="text-white hover:bg-teal-600 px-4 py-2 rounded-md text-sm font-medium"
+      >
+        Profile
+      </button>
+      <button
+        (click)="logout()"
+        class="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

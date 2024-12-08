@@ -1,0 +1,84 @@
+<div
+  class="dashboard-content quiz-container p-6 bg-white rounded-lg shadow-md max-w-3xl mx-auto"
+>
+  <h2 class="text-2xl font-semibold mb-4">
+    Quiz Yourself on any Topic and See How You Score!
+  </h2>
+
+  <textarea
+    [(ngModel)]="userMessage"
+    placeholder="Enter a topic for the quiz..."
+    rows="4"
+    class="w-full p-2 border border-gray-300 rounded-md mb-4"
+  ></textarea>
+
+  <button
+    (click)="fetchQuiz()"
+    [disabled]="isLoading || !userMessage.trim()"
+    class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+  >
+    {{ isLoading ? "Loading..." : "Generate Quiz" }}
+  </button>
+
+  <div *ngIf="quizData.length > 0" class="mt-6">
+    <h3 class="text-xl font-semibold mb-4">Quiz on: {{ userMessage }}</h3>
+
+    <form (ngSubmit)="calculateScore()">
+      <div
+        *ngFor="let question of quizData; let i = index"
+        class="question mb-6"
+      >
+        <p>
+          <strong>Q{{ i + 1 }}: {{ question.question }}</strong>
+        </p>
+
+        <div *ngFor="let option of ['A', 'B', 'C', 'D']">
+          <label class="block mb-2">
+            <input
+              type="radio"
+              name="question{{ i }}"
+              [value]="option"
+              [(ngModel)]="userAnswers[i]"
+              class="mr-2"
+            />
+            {{ option }}: {{ question.options[option] }}
+          </label>
+        </div>
+
+        <div
+          *ngIf="
+            showExplanations &&
+            userAnswers[i] &&
+            userAnswers[i] !== question.correctAnswer
+          "
+          class="mt-2 text-red-600"
+        >
+          <p><strong>Explanation:</strong> {{ question.explanation }}</p>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <button
+          type="submit"
+          [disabled]="userAnswers.includes('') || isLoading"
+          class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-700"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Display score and feedback message after submission -->
+  <div *ngIf="score !== null" class="mt-6 text-center">
+    <h3 class="text-2xl font-bold">
+      Your Score: {{ score }} / {{ quizData.length }}
+    </h3>
+    <p class="mt-4 text-xl">{{ feedbackMessage }}</p>
+  </div>
+
+  <!-- Display pie chart after submission -->
+  <div *ngIf="score !== null" class="mt-6 text-center">
+    <canvas id="scoreChart"></canvas>
+  </div>
+</div>

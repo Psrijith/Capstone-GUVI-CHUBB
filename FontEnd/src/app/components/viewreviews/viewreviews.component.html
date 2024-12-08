@@ -1,0 +1,33 @@
+<div class="dashboard-content container mx-auto py-12 px-4">
+  <h1 class="text-3xl font-bold text-center mb-8 text-gray-900">Available Courses</h1>
+
+  <div *ngFor="let course of courses" class="bg-white p-8 mb-8 rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ course.title }}</h2>
+    <p class="text-gray-600 text-base mb-4">{{ course.description }}</p>
+    <p class="text-gray-500 text-sm"><strong>Category:</strong> {{ course.category }}</p>
+    <p class="text-gray-500 text-sm"><strong>Instructor:</strong> {{ course.instructor.username }}</p>
+
+    <button 
+      (click)="toggleReviews(course.courseId)" 
+      class="mt-6 py-2 px-6 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
+    >
+      {{ showReviews[course.courseId] ? 'Hide Reviews' : 'View Reviews' }}
+    </button>
+
+    <div *ngIf="showReviews[course.courseId]" class="mt-6">
+      <h3 class="text-xl font-semibold mb-4">Reviews:</h3>
+
+      <div *ngIf="loading[course.courseId]" class="text-gray-500">Loading reviews...</div>
+
+      <div *ngIf="!loading[course.courseId] && (!reviews[course.courseId] || reviews[course.courseId].length === 0)" class="text-gray-500 italic">
+        No reviews available yet.
+      </div>
+
+      <div *ngFor="let review of reviews[course.courseId]" class="mt-4 p-6 bg-gray-50 rounded-lg shadow-lg">
+        <p class="font-semibold text-lg text-gray-800"><strong>Rating:</strong> {{ review.ratingValue }} / 5</p>
+        <p class="text-gray-600 mt-2">{{ review.reviewComments }}</p>
+        <p class="text-sm text-gray-400 mt-2"><strong>Date:</strong> {{ review.ratingDate | date }}</p>
+      </div>
+    </div>
+  </div>
+</div>

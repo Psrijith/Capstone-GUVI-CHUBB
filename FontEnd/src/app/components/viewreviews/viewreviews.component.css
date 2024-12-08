@@ -1,0 +1,33 @@
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ .dashboard-content {
+  overflow-y: auto;
+  padding: 20px;
+  max-height: 80vh;
+  background-color: #f4f4f4;
+}
+
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

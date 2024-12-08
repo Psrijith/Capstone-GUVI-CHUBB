@@ -1,0 +1,108 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+}
+
+.dashboard-content {
+  overflow-y: auto; 
+  max-height: 80vh;
+  background-color: #f4f4f4;
+}
+
+.admin-dashboard-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.side-panel {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  transition: width 0.3s;
+}
+
+.side-panel.collapsed {
+  width: 100px;
+}
+
+.side-panel .toggle-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px; /* Increased for mobile users */
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.side-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-panel ul li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+.side-panel ul li:hover {
+  text-decoration: underline;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.side-panel .icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.side-panel.collapsed .icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.side-panel.collapsed span {
+  display: none;
+}
+
+@media (max-width: 768px) { 
+  .side-panel.collapsed {
+    width: 80px; /* Reduced width for smaller screens */
+  }
+
+  .side-panel .icon {
+    font-size: 20px; /* Adjusted icon size */
+  }
+
+  .side-panel .toggle-button {
+    font-size: 30px; /* Larger toggle button for better touch accuracy */
+  }
+
+  .side-panel ul li {
+    margin: 10px 0; /* Reduced margin for more compact design */
+  }
+}
+
+@media (max-width: 480px) {
+  .side-panel.collapsed {
+    width: 60px;  /* Further reduced width on very small screens */
+  }
+
+  .side-panel .icon {
+    font-size: 18px; /* Adjusted icon size for better fit */
+  }
+
+  .side-panel .toggle-button {
+    font-size: 32px; /* Increased toggle button size for ease of use */
+  }
+
+  .side-panel ul li {
+    margin: 8px 0; /* Further reduce margin for smaller screens */
+  }
+}

@@ -1,0 +1,59 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-50 py-12" style="background-image: url('https://img.freepik.com/free-vector/flat-background-world-teacher-s-day-celebration_23-2150722546.jpg');">
+  
+  <div class="flex w-full max-w-7xl mx-auto px-4 lg:px-0"> 
+    <div class="w-full lg:w-1/2 bg-white p-12 flex flex-col justify-center rounded-r-lg shadow-xl" [@fadeInUp]>
+      <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-6 leading-tight">
+        Unlock Your Learning Potential
+      </h1>
+      <p class="text-lg text-gray-600 mb-8 max-w-md">
+        Access a wide range of top-notch online courses designed to help you excel in your career. 
+        Learn new skills or deepen your expertise with our high-quality content tailored for your growth.
+      </p>
+      
+      <!-- Buttons Section -->
+      <div class="space-y-4">
+        <!-- Login Button -->
+        <button (click)="goToLogin()" 
+                class="w-full px-6 py-3 bg-[#2ad2c9] text-white text-lg font-semibold rounded-md hover:bg-[#1a8c93] transition-all transform hover:scale-105 hover:shadow-lg">
+          Login
+        </button>
+
+        <!-- Register Button -->
+        <button (click)="goToRegister()" 
+                class="w-full px-6 py-3 bg-white text-[#2ad2c9] text-lg font-semibold rounded-md hover:bg-[#f1fafd] transition-all transform hover:scale-105 hover:shadow-lg">
+          Register
+        </button>
+      </div>
+    </div>
+     <div class="w-full lg:w-1/2 h-screen bg-cover bg-center rounded-l-lg hidden lg:block" 
+         style="background-image: url('https://img.freepik.com/free-vector/e-learning-icons-flat_1284-3950.jpg?semt=ais_hybrid');"
+         [@fadeIn]>
+      <!-- Image section, no content here -->
+    </div>
+  </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-gray-800 text-white py-6 ">
+  <div class="container mx-auto text-center">
+    <p class="text-sm">© 2024 Online Learning Platform. All rights reserved. Developed by Srijith.</p>
+    <div class="mt-4">
+      <a href="/login" class="text-indigo-400 hover:text-indigo-500 mx-4">Login</a>
+      <a href="/register" class="text-indigo-400 hover:text-indigo-500 mx-4">Register</a>
+    </div>
+    <div class="mt-6">
+      <a href="#" class="text-white hover:text-indigo-400 mx-4">
+        <i class="fab fa-facebook-f"></i> <!-- Example icon for Facebook -->
+      </a>
+      <a href="#" class="text-white hover:text-indigo-400 mx-4">
+        <i class="fab fa-twitter"></i> <!-- Example icon for Twitter -->
+      </a>
+      <a href="#" class="text-white hover:text-indigo-400 mx-4">
+        <i class="fab fa-linkedin-in"></i> <!-- Example icon for LinkedIn -->
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Add Font Awesome for social icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>

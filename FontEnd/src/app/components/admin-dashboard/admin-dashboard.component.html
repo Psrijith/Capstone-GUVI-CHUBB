@@ -1,0 +1,44 @@
+<div class="admin-dashboard-container">
+  <div class="admin-dashboard-content">
+    <div class="kpi-container">
+      <div class="kpi">
+        <h2>Total Users</h2>
+        <p>{{ totalUsers }}</p>
+      </div>
+      <div class="kpi">
+        <h2>Total Courses</h2>
+        <p>{{ totalCourses }}</p>
+      </div>
+      <div class="kpi">
+        <h2>Active Instructors</h2>
+        <p>{{ activeInstructors }}</p>
+      </div>
+      <div class="kpi">
+        <h2>Total Enrollments</h2>
+        <p>{{ totalEnrollments }}</p>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-container">
+      <!-- Pie Chart for User Roles -->
+      <div class="flex flex-row m-12 gap-24">
+          <div class="chart-item">
+            <h3>User Roles Distribution</h3>
+            <canvas id="userRolesChart"></canvas>
+          </div>
+          <div class="chart-item">
+          <h3>Enrollment Distribution</h3>
+          <canvas id="enrollmentDistributionChart"></canvas>
+        </div>
+      </div>
+  
+      <div class="chart-item w-full">
+        <h3>Courses by Category</h3>
+        <canvas id="coursesCategoryChart"></canvas>
+      </div>
+      <!-- Line Chart for Courses Category -->
+      
+    </div>
+  </div>
+</div>
