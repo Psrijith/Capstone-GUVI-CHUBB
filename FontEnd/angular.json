@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/demofend",
             "index": "src/index.html",
-            "main": "src/main.ts",  // Use 'main' instead of 'browser'
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -35,8 +35,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -44,8 +44,6 @@
                   "maximumError": "4kb"
                 }
               ],
-              "optimization": true,
-              "sourceMap": false,
               "outputHashing": "all"
             },
             "development": {
