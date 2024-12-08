@@ -1,5 +1,9 @@
 # Capstone Project: GUVI-CHUBB
 
+- **[Demonstration Video](https://drive.google.com/file/d/1cnibnmVzwx6bAHfM9HsM9_Xe2-SHJXFY/view?usp=sharing)**
+- **[Live Demo](https://capstone-frontend-mu.vercel.app/)**
+
+
 ## Overview
 This project is my capstone initiative, completed in collaboration with GUVI and CHUBB. It showcases a comprehensive solution integrating full-stack development, frontend-backend coordination, and real-world problem-solving to deliver a dynamic online learning platform.
 
@@ -43,9 +47,7 @@ This project is my capstone initiative, completed in collaboration with GUVI and
 
 5. **Highly Scalable Design**:
    - Ensures optimal performance with increasing user base and content.
+ 
 
-## Resources
-- **[Demonstration Video](https://drive.google.com/file/d/1cnibnmVzwx6bAHfM9HsM9_Xe2-SHJXFY/view?usp=sharing)**
-- **[Live Demo](https://capstone-frontend-mu.vercel.app/)**
 
 Feel free to explore the live demo and watch the video for a deeper understanding of the project's features and functionality.
