@@ -8,13 +8,6 @@
   "files": [
     "src/main.ts"
   ],
-  "budgets": [
-  {
-    "type": "initial",
-    "maximumWarning": "2mb",
-    "maximumError": "3mb"
-  }
-],
   "include": [
     "src/**/*.d.ts"
   ]
