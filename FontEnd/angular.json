@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/demofend",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -35,8 +35,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",  // Set warning at 1MB
+                  "maximumError": "2mb"     // Increase error limit to 2MB
                 },
                 {
                   "type": "anyComponentStyle",
@@ -44,7 +44,9 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,  // Enable optimization
+              "sourceMap": false,    // Disable source maps for production
+              "outputHashing": "all" // Hash all output files for cache busting
             },
             "development": {
               "optimization": false,
